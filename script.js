@@ -139,8 +139,16 @@ function dayFivShow(timeFiv, icon, temp, humid) {
 function localStorageList(){
     document.querySelector('#cityStorage').innerHTML = "";
     for(i=0; i<cities.length; i++){
-      document.querySelector('#cityStorage').innerHTML += `<li class="list-group-item">${cities[i]}</li>`;
+      document.querySelector('#cityStorage').innerHTML += `<li class="list-group-item" id="${i}" onclick="cityFetch(event)">${cities[i]}</li>`;
       console.log(`${cities[i]}`)
     }
     localStorage.setItem("cityStorage", JSON.stringify(cities));    
+}
+
+async function cityFetch(event){
+event.preventDefault();
+var city = event.target.innerHTML;
+document.querySelector('#cityInput').value = city;
+var cityName = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
+getData(cityName)
 }
