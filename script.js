@@ -1,15 +1,6 @@
 //global variables
 var cities = []
 
-//check local storage to see if city already exists
-if (localStorage.getItem("cityList") !== null) {
-    cities = JSON.parse(localStorage.cityList);
-    document.querySelector('#cityList').innerHTML = "";
-    for (i = 0; i < cities.length; i++) {
-        document.querySelector('#cityList').innerHTML += `<li class="list-group-item">${cities[i]}</li>`;
-    }
-}
-
 // get city data
 async function getData() {
     var city = document.querySelector('#cityInput').value;
@@ -105,30 +96,39 @@ function showWeather(cityName, temp, humid, wind, uv, icon) {
     document.getElementById('wind').innerHTML = `Wind: ${wind}`
     document.getElementById('uv').innerHTML = `UV: ${uv}`
 }
+
+//show weather day 1
 function dayOneShow(timeOne, icon, temp, humid) {
     document.getElementById('dayOne').innerHTML = `${timeOne}`;
     document.getElementById('iconOne').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-50"/>`;
     document.getElementById('tempOne').innerHTML = `${temp}°`;
     document.getElementById('humidOne').innerHTML = `Humidity: ${humid}`;
 }
+//show weather day 2
 function dayTwoShow(timeTwo, icon, temp, humid) {
     document.getElementById('dayTwo').innerHTML = `${timeTwo}`;;
     document.getElementById('iconTwo').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-50"/>`;
     document.getElementById('tempTwo').innerHTML = `${temp}°`;
     document.getElementById('humidTwo').innerHTML = `Humidity: ${humid}`;
 }
+
+//show weather day 3
 function dayThrShow(timeThr, icon, temp, humid) {
     document.getElementById('dayThr').innerHTML = `${timeThr}`;;
     document.getElementById('iconThr').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-50"/>`;
     document.getElementById('tempThr').innerHTML = `${temp}°`;
     document.getElementById('humidThr').innerHTML = `Humidity: ${humid}`;
 }
+
+//show weather day 4
 function dayFouShow(timeFou, icon, temp, humid) {
     document.getElementById('dayFou').innerHTML = `${timeFou}`;;
     document.getElementById('iconFou').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-50"/>`;
     document.getElementById('tempFou').innerHTML = `${temp}°`;
     document.getElementById('humidFou').innerHTML = `Humidity: ${humid}`;
 }
+
+//show weather day 5
 function dayFivShow(timeFiv, icon, temp, humid) {
     document.getElementById('dayFiv').innerHTML = `${timeFiv}`;;
     document.getElementById('iconFiv').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-50"/>`;
@@ -136,6 +136,7 @@ function dayFivShow(timeFiv, icon, temp, humid) {
     document.getElementById('humidFiv').innerHTML = `Humidity: ${humid}`;
 }
 
+//add searched item to local storage
 function localStorageList(){
     document.querySelector('#cityStorage').innerHTML = "";
     for(i=0; i<cities.length; i++){
@@ -145,6 +146,7 @@ function localStorageList(){
     localStorage.setItem("cityStorage", JSON.stringify(cities));    
 }
 
+//allow the list item to be clicked on
 async function cityFetch(event){
 event.preventDefault();
 var city = event.target.innerHTML;
