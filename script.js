@@ -139,7 +139,7 @@ function dayFivShow(timeFiv, icon, temp, humid) {
 function localStorageList(){
     document.querySelector('#cityStorage').innerHTML = "";
     for(i=0; i<cities.length; i++){
-      document.querySelector('#cityStorage').innerHTML += `<li class="list-group-item" id="${i}" onclick="cityFetch(event)">${cities[i]}</li>`;
+      document.querySelector('#cityStorage').innerHTML += `<li class="list-group-item" onclick="cityFetch(event)">${cities[i]}</li>`;
       console.log(`${cities[i]}`)
     }
     localStorage.setItem("cityStorage", JSON.stringify(cities));    
