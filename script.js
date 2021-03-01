@@ -4,13 +4,13 @@ var cities = []
 // get city data
 async function getData() {
     var city = document.querySelector('#cityInput').value;
-    var cityName = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
+    var cityName = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
     cities.push(city);
 
     lat = cityName.coord.lat
     lon = cityName.coord.lon
 
-    var cityInfo = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
+    var cityInfo = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
 
     console.log(cityInfo)
 
@@ -151,6 +151,6 @@ async function cityFetch(event){
 event.preventDefault();
 var city = event.target.innerHTML;
 document.querySelector('#cityInput').value = city;
-var cityName = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
+var cityName = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7e94155b41181a95092f569ee46d67e1`).then( r=>r.json())
 getData(cityName)
 }
