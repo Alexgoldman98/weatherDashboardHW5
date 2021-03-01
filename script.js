@@ -29,6 +29,21 @@ async function getData() {
     var uv = cityInfo.current.uvi
     var icon = cityInfo.current.weather[0].icon;
 
+    if(uv >= 0 && uv <= 2){
+        document.querySelector('#uv').style.backgroundColor = "green";
+        document.querySelector('#uv').style.color = "white";
+    } else if(uv >= 3 && uv <= 5){
+        document.querySelector('#uv').style.backgroundColor = "yellow";
+        document.querySelector('#uv').style.color = "black";
+    } else if(uv >= 6 && uv <= 7){
+        document.querySelector('#uv').style.backgroundColor = "orange";
+    } else if(uv >= 11 && uv <= 10){
+        document.querySelector('#uv').style.backgroundColor = "red";
+        document.querySelector('#uv').style.color = "white";
+    } else if(uv >= 11){
+        document.querySelector('#uv').style.backgroundColor = "purple";
+    }
+
     var dayOne = {
         timeOne: moment().add(1, 'days').format('MMMM Do'),
         temp: cityInfo.daily[1].temp.day,
@@ -76,20 +91,19 @@ async function getData() {
 
     dayFivShow(dayFiv.timeFiv, dayFiv.icon, dayFiv.temp, dayFiv.humid)
 
+    localStorageList()
+
 }
 // show city specific weather
 function showWeather(cityName, temp, humid, wind, uv, icon) {
     var currentDate = moment().format('MMMM Do YYYY');
-    document.getElementById('date').innerHTML = `${currentDate}`
 
     //show current weather
-    document.getElementById('cityCard').innerHTML = `${cityName.name}`
-    //document.getElementById('description').innerHTML = `${cityName.weather[0].description}`
+    document.getElementById('cityCard').innerHTML = `<h3> ${cityName.name} | ${currentDate} <img src="https://openweathermap.org/img/wn/${icon}.png"/> </h3>`
     document.getElementById('temp').innerHTML = `${temp}°`
     document.getElementById('humid').innerHTML = `Humidity: ${humid}`
     document.getElementById('wind').innerHTML = `Wind: ${wind}`
     document.getElementById('uv').innerHTML = `UV: ${uv}`
-    document.getElementById('icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" class="w-25"/>`
 }
 function dayOneShow(timeOne, icon, temp, humid) {
     document.getElementById('dayOne').innerHTML = `${timeOne}`;
@@ -122,10 +136,11 @@ function dayFivShow(timeFiv, icon, temp, humid) {
     document.getElementById('humidFiv').innerHTML = `Humidity: ${humid}`;
 }
 
-
-//getTemp
-//getHumid
-//getWind
-//getUV
-//get weather forecast and put the forecast into each day
-//save that city to local storage and make it appear on the left
+function localStorageList(){
+    document.querySelector('#cityStorage').innerHTML = "";
+    for(i=0; i<cities.length; i++){
+      document.querySelector('#cityStorage').innerHTML += `<li class="list-group-item">${cities[i]}</li>`;
+      console.log(`${cities[i]}`)
+    }
+    localStorage.setItem("cityStorage", JSON.stringify(cities));    
+}
